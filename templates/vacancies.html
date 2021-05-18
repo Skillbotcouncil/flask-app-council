@@ -1,0 +1,72 @@
+{% extends "navigationpage.html" %}
+{% block vacancy %}
+
+		<div class="container-fluid" id="wrapper">
+			<div class="container">
+
+			<div class="jumbotron">
+					<h2>Job Vacancy Insertion</h2>
+
+					<form action="{{ url_for('addvacancy') }}" method="POST" role="form">
+
+						<div class="form-row">
+							<div class="col-sm-10">
+							  <input name="app-title" type="text" class="form-control" placeholder="Enter Title" aria-label="jobvacancy" aria-describedby="add-btn">
+							</div>
+							<div class="col-sm-10">
+							  <input name="app-company" type="text" class="form-control" placeholder="Enter Company Name" aria-label="jobvacancy" aria-describedby="add-btn">
+							</div>
+							<div class="col-sm-10">
+							  <input name="app-location" type="text" class="form-control" placeholder="Enter Location" aria-label="jobvacancy" aria-describedby="add-btn">
+							</div>
+							<div class="col-sm-10">
+							  <input name="app-salary" type="text" class="form-control" placeholder="Enter Salary" aria-label="jobvacancy" aria-describedby="add-btn">
+							</div>
+							<div class="col-sm-10">
+							  <input name="app-description" type="text" class="form-control" placeholder="Enter Description" aria-label="jobvacancy" aria-describedby="add-btn">
+							</div>
+							<div class="col-sm-10">
+								<span class="input-group-btn">
+								  <button type="submit" class="btn btn-primary" id="add-btn">ADD</button>
+							  </span>
+							</div>
+
+							</div>
+					</form>
+
+					<div class="row t10">
+						<div class="col-lg-12">
+							<div class="btn-toolbar">
+								<div class="btn-group">
+									<a type="button" href="{{ url_for('delete_vacancy_completed') }}" class="btn btn-warning">
+										DELETE SELECTED
+									</a>
+								</div>
+								<div class="btn-group">
+									<a type="button" href="{{ url_for('delete_vacancy_all') }}" class="btn btn-warning">
+										DELETE ALL
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<ul class="list-group t20">
+						{% for jobvacancy in jobvacancys %}
+						<a href="{{ url_for('completevacany', oid=jobvacancy._id )}}">
+							<li class="list-group-item {% if jobvacancy.complete %}jobvacancy-completed{% endif %}">
+								<br>Title: {{ jobvacancy.title }}
+								<br>Company: {{jobvacancy.company}}
+								<br>Location: {{jobvacancy.location}}
+								<br>Salary: {{jobvacancy.salary}}
+								<br>Description: {{jobvacancy.description}}
+							</li>
+						</a>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+					</div>
+
+
+{% endblock %}

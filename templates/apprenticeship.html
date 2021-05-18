@@ -1,0 +1,69 @@
+{% extends "navigationpage.html" %}
+{%block apprenticeship%}
+
+		<div class="container-fluid" id="wrapper">
+
+			<div class="container">
+
+			<div class="jumbotron">
+					<h2>Apprenticeship Insertion</h2>
+
+					<form action="{{ url_for('add_todo') }}" method="POST" role="form">
+
+						<div class="form-row">
+							<div class="col-sm-10">
+							  <input name="app-title" type="text" class="form-control" placeholder="Enter Title" aria-label="Todo" aria-describedby="add-btn">
+							</div>
+							<div class="col-sm-10">
+							  <input name="app-company" type="text" class="form-control" placeholder="Enter Company Name" aria-label="Todo" aria-describedby="add-btn">
+							</div>
+							<div class="col-sm-10">
+							  <input name="app-university" type="text" class="form-control" placeholder="Enter University" aria-label="Todo" aria-describedby="add-btn">
+							</div>
+							<div class="col-sm-10">
+							  <input name="app-description" type="text" class="form-control" placeholder="Enter Description" aria-label="Todo" aria-describedby="add-btn">
+							</div>
+							<div class="col-sm-10">
+								<span class="input-group-btn">
+								  <button type="submit" class="btn btn-primary" id="add-btn">ADD</button>
+							  </span>
+							</div>
+
+						</div>
+					</form>
+
+					<div class="row t10">
+						<div class="col-lg-12">
+							<div class="btn-toolbar">
+								<div class="btn-group">
+									<a type="button" href="{{ url_for('delete_completed') }}" class="btn btn-warning">
+										DELETE SELECTED
+									</a>
+								</div>
+								<div class="btn-group">
+									<a type="button" href="{{ url_for('delete_all') }}" class="btn btn-warning">
+										DELETE ALL
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<ul class="list-group t20">
+						{% for todo in todos %}
+						<a href="{{ url_for('complete', oid=todo._id )}}">
+							<li class="list-group-item {% if todo.complete %}todo-completed{% endif %}">
+								<br>Title: {{ todo.title }}
+								<br>Company: {{todo.company}}
+								<br>University: {{todo.university}}
+								<br>Description: {{todo.description}}
+							</li>
+						</a>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+
+		</div>
+
+{% endblock %}
